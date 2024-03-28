@@ -44,7 +44,6 @@ public class Customer {
     private LocalDateTime updatedAt;
 
     @OneToOne(mappedBy = "customer")
-    private ShoppingCart shoppingCartId;
+    private ShoppingCart customer;
 
-    //TODO: Relacionar ManyToMany com Book
 }

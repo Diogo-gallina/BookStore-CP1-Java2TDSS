@@ -13,33 +13,28 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "JAVA_CP1_BOOK")
+@Table(name = "JAVA_CP1_ASSESSMENT")
 @EntityListeners(AuditingEntityListener.class)
-public class Book {
+public class Assessment {
 
     @Id
-    @GeneratedValue
-    @Column(name = "book_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "assessment_id")
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 50)
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book book;
 
-    @Column(name = "isbn", nullable = false, length = 20, unique = true)
-    private String isbn;
-
-    @Column(name = "author", nullable = false, length = 50)
-    private String author;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender_type", nullable = false, length = 50)
-    private GenderTypes gender;
-
-    @Column(name = "value", nullable = false)
-    private Double value;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
     @Column(name = "rating")
     private Double rating;
+
+    @Column(name = "comment", length = 255)
+    private String comment;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false)

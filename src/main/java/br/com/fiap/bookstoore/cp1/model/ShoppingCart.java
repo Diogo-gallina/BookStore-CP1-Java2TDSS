@@ -23,14 +23,6 @@ public class ShoppingCart {
     @Column(name = "shopping_cart_id")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customerId;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "shopping_cart_id")
-    private List<Book> items;
-
     @Transient
     private Double amount;
 
@@ -41,6 +33,12 @@ public class ShoppingCart {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    //TODO: Relacionar com cliete
+    @OneToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "shopping_cart_id")
+    private List<Book> items;
 
 }
