@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "JAVA-CP1-ADRESS")
+@Table(name = "JAVA_CP1_ADRESS")
 @EntityListeners(AuditingEntityListener.class)
 public class Adress {
 

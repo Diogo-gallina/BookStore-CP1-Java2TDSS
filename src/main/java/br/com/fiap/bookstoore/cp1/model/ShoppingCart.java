@@ -1,6 +1,5 @@
 package br.com.fiap.bookstoore.cp1.model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,33 +7,32 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter @Setter
 @NoArgsConstructor
 
 @Entity
-@Table(name="JAVA_CP1_CUSTOMER")
+@Table(name = "JAVA_CP1_SHOPPING_CART")
 @EntityListeners(AuditingEntityListener.class)
-public class Customer {
+public class ShoppingCart {
 
     @Id
     @GeneratedValue
-    @Column(name = "customer_id")
+    @Column(name = "shopping_cart_id")
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 50)
-    private String name;
+    @OneToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customerId;
 
-    @Column(name = "email", nullable = false, length = 70)
-    private String email;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "shopping_cart_id")
+    private List<Book> items;
 
-    @Column(name = "password", nullable = false, length = 40)
-    private String password;
-
-    @Column(name = "birthday_date", nullable = false)
-    private LocalDate birthdayDate;
+    @Transient
+    private Double amount;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false)
@@ -43,8 +41,6 @@ public class Customer {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy = "customer")
-    private ShoppingCart shoppingCartId;
+    //TODO: Relacionar com cliete
 
-    //TODO: Relacionar ManyToMany com Book
 }

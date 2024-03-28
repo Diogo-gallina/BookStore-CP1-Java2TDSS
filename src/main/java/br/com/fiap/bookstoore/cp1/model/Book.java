@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "JAVA-CP1-BOOK")
+@Table(name = "JAVA_CP1_BOOK")
 @EntityListeners(AuditingEntityListener.class)
 public class Book {
 
@@ -35,7 +35,10 @@ public class Book {
     @Column(name = "gender_type", nullable = false, length = 50)
     private GenderTypes gender;
 
-    @Column(name = "author")
+    @Column(name = "value", nullable = false)
+    private Double value;
+
+    @Column(name = "rating")
     private Double rating;
 
     @CreatedDate
