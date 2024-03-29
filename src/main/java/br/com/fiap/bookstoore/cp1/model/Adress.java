@@ -1,6 +1,7 @@
 package br.com.fiap.bookstoore.cp1.model;
 
 import jakarta.persistence.*;
+import jakarta.websocket.ClientEndpoint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,6 +37,9 @@ public class Adress {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @ManyToOne
+    private Customer customer;
 
     //TODO: Adicionar relacionamento com Cliente
 
