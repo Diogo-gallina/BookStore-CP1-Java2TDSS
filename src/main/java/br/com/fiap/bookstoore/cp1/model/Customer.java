@@ -57,4 +57,5 @@ public class Customer {
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> books = new HashSet<>();
+
 }
