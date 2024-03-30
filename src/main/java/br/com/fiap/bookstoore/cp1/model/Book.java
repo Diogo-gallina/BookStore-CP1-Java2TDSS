@@ -8,6 +8,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -48,4 +50,6 @@ public class Book {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @ManyToMany(mappedBy = "books")
+    private Set<Customer> customers = new HashSet<>();
 }

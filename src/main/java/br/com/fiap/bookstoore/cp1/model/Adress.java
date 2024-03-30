@@ -39,8 +39,7 @@ public class Adress {
     private LocalDateTime updatedAt;
 
     @ManyToOne
+    @JoinColumn(name = "adress_id")
     private Customer customer;
-
-    //TODO: Adicionar relacionamento com Cliente
 
 }

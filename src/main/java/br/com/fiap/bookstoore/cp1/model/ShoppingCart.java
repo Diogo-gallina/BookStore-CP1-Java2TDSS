@@ -23,9 +23,6 @@ public class ShoppingCart {
     @Column(name = "shopping_cart_id")
     private Long id;
 
-    @Transient
-    private Double amount;
-
     @CreatedDate
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -40,5 +37,8 @@ public class ShoppingCart {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "shopping_cart_id")
     private List<Book> items;
+
+    @Transient
+    private Double amount;
 
 }

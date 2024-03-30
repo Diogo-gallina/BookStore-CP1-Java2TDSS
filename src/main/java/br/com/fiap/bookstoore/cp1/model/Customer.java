@@ -10,6 +10,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -43,7 +46,15 @@ public class Customer {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy = "customer")
-    private ShoppingCart customer;
+    @OneToMany(mappedBy = "customer")
+    private List<Adress> Adress;
 
+    @OneToOne(mappedBy = "customer")
+    private ShoppingCart shoppingCart;
+
+    @ManyToMany
+    @JoinTable(name = "JAVA_CP1_CUSTOMER_BOOK",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private Set<Book> books = new HashSet<>();
 }
