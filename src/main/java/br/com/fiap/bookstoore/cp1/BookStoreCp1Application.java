@@ -1,4 +1,4 @@
-package br.com.fiap.bookstoore.cp1.BookStoreCP1;
+package br.com.fiap.bookstoore.cp1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
