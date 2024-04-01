@@ -1,4 +1,4 @@
-package br.com.fiap.bookstoore.cp1.BookStoreCP1;
+package br.com.fiap.bookstoore.cp1;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
