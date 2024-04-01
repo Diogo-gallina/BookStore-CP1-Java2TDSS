@@ -39,7 +39,7 @@ public class Adress {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "adress_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
 }

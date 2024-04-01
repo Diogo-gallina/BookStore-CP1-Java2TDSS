@@ -1,5 +1,6 @@
 package br.com.fiap.bookstoore.cp1.model;
 
+import br.com.fiap.bookstoore.cp1.dto.customer.CreateCustomerDTO;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -58,4 +59,11 @@ public class Customer {
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> books = new HashSet<>();
 
+    public Customer(CreateCustomerDTO customerDTO) {
+        this.name = customerDTO.name();
+        this.email = customerDTO.email();
+        this.password = customerDTO.password();
+        this.birthdayDate = customerDTO.birthdayDate();
+        this.createdAt = customerDTO.createdAt();
+    }
 }
