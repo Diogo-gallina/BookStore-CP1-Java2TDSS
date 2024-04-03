@@ -10,9 +10,7 @@ public record CreateBookDTO(
         String author,
         GenderTypes gender,
         Double value,
-        Double rating,
-        LocalDateTime createdAt
-
+        Double rating
 
 ) {
 }

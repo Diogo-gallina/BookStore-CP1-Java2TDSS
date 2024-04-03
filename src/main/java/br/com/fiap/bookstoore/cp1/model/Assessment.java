@@ -9,16 +9,16 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 
 @Entity
-@Table(name = "JAVA_CP1_ASSESSMENT")
-@EntityListeners(AuditingEntityListener.class)
+@Table(name = "java_cp1_assessment")
 public class Assessment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "assessment_id")
     private Long id;
 
@@ -30,10 +30,10 @@ public class Assessment {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @Column(name = "rating")
+    @Column(name = "rating", nullable = false)
     private Double rating;
 
-    @Column(name = "comment", length = 255)
+    @Column(name = "customer_comment", nullable = false, length = 50)
     private String comment;
 
     @CreatedDate
@@ -42,5 +42,10 @@ public class Assessment {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+    }
 
 }

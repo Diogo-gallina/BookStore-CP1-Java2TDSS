@@ -1,7 +1,6 @@
 package br.com.fiap.bookstoore.cp1.model;
 
 import br.com.fiap.bookstoore.cp1.dto.customer.CreateCustomerDTO;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 
 @Entity
-@Table(name="JAVA_CP1_CUSTOMER")
+@Table(name="java_cp1_customer")
 @EntityListeners(AuditingEntityListener.class)
 public class Customer {
 
@@ -47,9 +46,6 @@ public class Customer {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Adress> Adress;
-
     @OneToOne(mappedBy = "customer")
     private ShoppingCart shoppingCart;
 
@@ -59,11 +55,18 @@ public class Customer {
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> books = new HashSet<>();
 
+    @OneToMany(mappedBy = "customer")
+    private List<Adress> addresses;
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+    }
+
     public Customer(CreateCustomerDTO customerDTO) {
         this.name = customerDTO.name();
         this.email = customerDTO.email();
         this.password = customerDTO.password();
         this.birthdayDate = customerDTO.birthdayDate();
-        this.createdAt = customerDTO.createdAt();
     }
 }

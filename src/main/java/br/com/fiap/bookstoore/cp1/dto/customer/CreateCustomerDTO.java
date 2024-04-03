@@ -7,7 +7,6 @@ public record CreateCustomerDTO (
     String name,
     String email,
     String password,
-    LocalDate birthdayDate,
-    LocalDateTime createdAt
+    LocalDate birthdayDate
 ){
 }

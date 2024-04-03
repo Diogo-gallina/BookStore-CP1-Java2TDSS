@@ -13,7 +13,7 @@ public class BookService {
     BookRepository bookRepository;
 
     public Book create(CreateBookDTO bookDTO) {
-        Book book = new Book(bookDTO);
+        var book = new Book(bookDTO);
         return bookRepository.save(book);
     }
 

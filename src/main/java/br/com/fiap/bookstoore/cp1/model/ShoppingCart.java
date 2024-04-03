@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "JAVA_CP1_SHOPPING_CART")
+@Table(name = "java_cp1_shopping_cart")
 @EntityListeners(AuditingEntityListener.class)
 public class ShoppingCart {
 
