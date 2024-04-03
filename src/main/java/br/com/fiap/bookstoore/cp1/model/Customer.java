@@ -50,7 +50,7 @@ public class Customer {
     private ShoppingCart shoppingCart;
 
     @ManyToMany
-    @JoinTable(name = "JAVA_CP1_CUSTOMER_BOOK",
+    @JoinTable(name = "java_cp1_customer_book",
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> books = new HashSet<>();

@@ -2,15 +2,18 @@ package br.com.fiap.bookstoore.cp1.service;
 
 import br.com.fiap.bookstoore.cp1.dto.customer.CreateCustomerDTO;
 import br.com.fiap.bookstoore.cp1.dto.customer.CustomerDetailsDTO;
+import br.com.fiap.bookstoore.cp1.dto.customer.UpdateCustomerDTO;
 import br.com.fiap.bookstoore.cp1.handler.InvalidEmailException;
 import br.com.fiap.bookstoore.cp1.handler.WeakPasswordException;
 import br.com.fiap.bookstoore.cp1.model.Customer;
 import br.com.fiap.bookstoore.cp1.repository.CustomerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -36,6 +39,42 @@ public class CustomerService {
         var customerList = customerRepository.findAll(pageable)
                 .stream().map(CustomerDetailsDTO::new).toList();;
         return customerList;
+    }
+
+    public CustomerDetailsDTO getOne(Long id){
+        var customer = customerRepository.getReferenceById(id);
+        return new CustomerDetailsDTO(customer);
+    }
+
+    @Transactional
+    public CustomerDetailsDTO update(Long id, UpdateCustomerDTO customerDTO) {
+        var customer = customerRepository.getReferenceById(id);
+
+        if(customer.getName() != null)
+            customer.setName(customerDTO.name());
+
+        if(customer.getEmail() != null)
+            customer.setEmail(customerDTO.email());
+
+        if(customer.getPassword() != null)
+            customer.setPassword(customerDTO.password());
+
+        if(!validateStrongPassword(customer.getPassword()))
+            throw new WeakPasswordException();
+
+        if(!validateEmail(customer.getEmail()))
+            throw new InvalidEmailException();
+
+        customer.setUpdatedAt(LocalDateTime.now());
+
+        customerRepository.save(customer);
+
+        return new CustomerDetailsDTO(customer);
+    }
+
+    @Transactional
+    public void delete(Long id){
+        customerRepository.deleteById(id);
     }
 
     private Boolean validateStrongPassword(String password){

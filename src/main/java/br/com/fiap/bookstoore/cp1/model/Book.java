@@ -65,6 +65,5 @@ public class Book {
         this.author = bookDTO.author();
         this.gender = bookDTO.gender();
         this.value = bookDTO.value();
-        this.rating = bookDTO.rating();
     }
 }

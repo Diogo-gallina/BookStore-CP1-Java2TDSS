@@ -2,8 +2,10 @@ package br.com.fiap.bookstoore.cp1.controller;
 
 import br.com.fiap.bookstoore.cp1.dto.customer.CreateCustomerDTO;
 import br.com.fiap.bookstoore.cp1.dto.customer.CustomerDetailsDTO;
+import br.com.fiap.bookstoore.cp1.dto.customer.UpdateCustomerDTO;
 import br.com.fiap.bookstoore.cp1.model.Customer;
 import br.com.fiap.bookstoore.cp1.service.CustomerService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +41,23 @@ public class CustomerController {
         return ResponseEntity.ok(customerList);
     }
 
+    @GetMapping({"{id}"})
+    public ResponseEntity<CustomerDetailsDTO> findOne(@PathVariable("id") Long id){
+        var customer = customerService.getOne(id);
+        return ResponseEntity.ok(customer);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<CustomerDetailsDTO> update(@PathVariable("id") Long id, @RequestBody UpdateCustomerDTO customerDTO){
+        var customer = customerService.update(id, customerDTO);
+        return ResponseEntity.ok(customer);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id){
+        customerService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
+

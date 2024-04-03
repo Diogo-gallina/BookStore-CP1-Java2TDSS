@@ -9,8 +9,7 @@ public record CreateBookDTO(
         String isbn,
         String author,
         GenderTypes gender,
-        Double value,
-        Double rating
+        Double value
 
 ) {
 }
