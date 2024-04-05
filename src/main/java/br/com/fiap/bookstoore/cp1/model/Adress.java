@@ -1,5 +1,6 @@
 package br.com.fiap.bookstoore.cp1.model;
 
+import br.com.fiap.bookstoore.cp1.dto.adress.CreateAdressDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,12 @@ public class Adress {
     @PrePersist
     public void prePersist() {
         createdAt = LocalDateTime.now();
+    }
+
+    public Adress(CreateAdressDTO adressDTO) {
+        cep = adressDTO.cep();
+        street = adressDTO.street();
+        adressNumber = adressDTO.adressNumber();
     }
 
 }
