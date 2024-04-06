@@ -71,14 +71,14 @@ public class AdressService {
         if(!customerAdressesIds.contains(adressId))
             throw new InvalidAddressException();
 
-        if(adress.getStreet() != null)
+        if(!adress.getStreet().isEmpty())
             adress.setStreet(adressDTO.street());
+
+        if(!adress.getCep().isEmpty())
+            adress.setCep(adressDTO.cep());
 
         if(adress.getAdressNumber() != null)
             adress.setAdressNumber(adressDTO.adressNumber());
-
-        if(adress.getCep() != null)
-            adress.setCep(adressDTO.cep());
 
         adress.setUpdatedAt(LocalDateTime.now());
 

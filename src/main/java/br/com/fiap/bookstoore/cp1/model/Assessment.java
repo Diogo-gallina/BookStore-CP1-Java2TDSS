@@ -1,5 +1,6 @@
 package br.com.fiap.bookstoore.cp1.model;
 
+import br.com.fiap.bookstoore.cp1.dto.assessment.CreateAssessmentDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,6 +43,11 @@ public class Assessment {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public Assessment(CreateAssessmentDTO assessmentDTO) {
+        rating = assessmentDTO.rating();
+        comment = assessmentDTO.comment();
+    }
 
     @PrePersist
     public void prePersist() {
