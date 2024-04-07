@@ -5,13 +5,13 @@ import br.com.fiap.bookstoore.cp1.model.ShoppingCart;
 
 import java.util.List;
 
-public record ShoppingCartDetails(
+public record ShoppingCartDetailsDTO(
         Long shoppingCartId,
         Long customerId,
         List<Book> items,
         Double amount
 ) {
-    public ShoppingCartDetails(ShoppingCart shoppingCart){
+    public ShoppingCartDetailsDTO(ShoppingCart shoppingCart){
         this(
                 shoppingCart.getId(),
                 shoppingCart.getCustomer().getId(),
