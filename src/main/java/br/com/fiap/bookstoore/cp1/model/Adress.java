@@ -1,24 +1,24 @@
 package br.com.fiap.bookstoore.cp1.model;
 
+import br.com.fiap.bookstoore.cp1.dto.address.CreateAdressDTO;
 import jakarta.persistence.*;
-import jakarta.websocket.ClientEndpoint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 
 @Entity
-@Table(name = "JAVA_CP1_ADRESS")
-@EntityListeners(AuditingEntityListener.class)
+@Table(name = "java_cp1_adress")
 public class Adress {
 
     @Id
+    @GeneratedValue
     @Column(name = "adress_id")
     private Long id;
 
@@ -28,8 +28,8 @@ public class Adress {
     @Column(name = "street", nullable = false, length = 70)
     private String street;
 
-    @Column(name = "number", nullable = false)
-    private int number;
+    @Column(name = "adress_number", nullable = false)
+    private Integer adressNumber;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false)
@@ -38,8 +38,19 @@ public class Adress {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name = "adress_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+    }
+
+    public Adress(CreateAdressDTO adressDTO) {
+        cep = adressDTO.cep();
+        street = adressDTO.street();
+        adressNumber = adressDTO.adressNumber();
+    }
 
 }

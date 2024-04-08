@@ -1,5 +1,6 @@
 package br.com.fiap.bookstoore.cp1.model;
 
+import br.com.fiap.bookstoore.cp1.dto.book.CreateBookDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,15 +8,17 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter @Setter
 @NoArgsConstructor
 
 @Entity
-@Table(name = "JAVA_CP1_BOOK")
+@Table(name = "java_cp1_book")
 @EntityListeners(AuditingEntityListener.class)
 public class Book {
 
@@ -52,4 +55,20 @@ public class Book {
 
     @ManyToMany(mappedBy = "books")
     private Set<Customer> customers = new HashSet<>();
+
+    @OneToMany(mappedBy = "book")
+    private List<Assessment> assessments;
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+    }
+
+    public Book(CreateBookDTO bookDTO) {
+        this.name = bookDTO.name();
+        this.isbn = bookDTO.isbn();
+        this.author = bookDTO.author();
+        this.gender = bookDTO.gender();
+        this.value = bookDTO.value();
+    }
 }
