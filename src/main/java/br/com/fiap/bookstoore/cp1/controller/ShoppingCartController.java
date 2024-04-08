@@ -12,7 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("shoppingcarts")
+@RequestMapping("/shoppingcarts")
 public class ShoppingCartController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class ShoppingCartController {
             UriComponentsBuilder uri
     ){
         var shoppingCart = shoppingCartService.create(customerId, shoppingCartDTO);
-        var url = uri.path("shoppingCarts/customer/{customer_id}")
+        var url = uri.path("shoppingcarts/customer/{customer_id}")
                 .buildAndExpand(customerId).toUri();
 
         return ResponseEntity.created(url).body(new ShoppingCartDetailsDTO(shoppingCart));
@@ -39,17 +39,17 @@ public class ShoppingCartController {
         return ResponseEntity.ok(shoppingCartList);
     }
 
-    @GetMapping("{shoppingCart_id}")
+    @GetMapping("{shoppingcart_id}")
     public ResponseEntity<ShoppingCartDetailsDTO> findOne(
-        @PathVariable("shoppingCart_id") Long shoppingCartId
+        @PathVariable("shoppingcart_id") Long shoppingCartId
     ){
         var shoppingCart = shoppingCartService.getOne(shoppingCartId);
         return ResponseEntity.ok(shoppingCart);
     }
 
-    @DeleteMapping("{shoppingCart_id}")
+    @DeleteMapping("{shoppingcart_id}")
     public ResponseEntity<Void> delete(
-            @PathVariable("shoppingCart_id") Long shoppingCartId
+            @PathVariable("shoppingcart_id") Long shoppingCartId
     ){
         shoppingCartService.delete(shoppingCartId);
         return ResponseEntity.noContent().build();

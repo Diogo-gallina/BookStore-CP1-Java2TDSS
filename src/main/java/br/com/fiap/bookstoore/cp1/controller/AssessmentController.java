@@ -64,7 +64,7 @@ public class AssessmentController {
         return ResponseEntity.ok(assessment);
     }
 
-    @DeleteMapping("assessment_id")
+    @DeleteMapping("{assessment_id}")
     public ResponseEntity<Void> delete(
         @PathVariable("assessment_id") Long assessmentId
     ){
