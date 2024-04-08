@@ -1,8 +1,8 @@
 package br.com.fiap.bookstoore.cp1.controller;
 
-import br.com.fiap.bookstoore.cp1.dto.adress.AdressDetailsDTO;
-import br.com.fiap.bookstoore.cp1.dto.adress.CreateAdressDTO;
-import br.com.fiap.bookstoore.cp1.dto.adress.UpdateAdressDTO;
+import br.com.fiap.bookstoore.cp1.dto.address.AdressDetailsDTO;
+import br.com.fiap.bookstoore.cp1.dto.address.CreateAdressDTO;
+import br.com.fiap.bookstoore.cp1.dto.address.UpdateAdressDTO;
 import br.com.fiap.bookstoore.cp1.service.AdressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +19,7 @@ public class AdressController {
     @Autowired
     AdressService adressService;
 
-    @PostMapping("{customer_id}")
+    @PostMapping("customer/{customer_id}")
     public ResponseEntity<AdressDetailsDTO> create(
             @PathVariable("customer_id") Long customerId,
             @RequestBody CreateAdressDTO adressDTO,
@@ -63,7 +63,6 @@ public class AdressController {
         var adress = adressService.update(adressId, customerId, adressDTO);
         return ResponseEntity.ok(adress);
     }
-
 
     @DeleteMapping("{adress_id}")
     public ResponseEntity<Void> delete(

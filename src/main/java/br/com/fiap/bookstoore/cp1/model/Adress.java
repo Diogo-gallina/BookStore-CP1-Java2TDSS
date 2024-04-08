@@ -1,6 +1,6 @@
 package br.com.fiap.bookstoore.cp1.model;
 
-import br.com.fiap.bookstoore.cp1.dto.adress.CreateAdressDTO;
+import br.com.fiap.bookstoore.cp1.dto.address.CreateAdressDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,7 +38,7 @@ public class Adress {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 

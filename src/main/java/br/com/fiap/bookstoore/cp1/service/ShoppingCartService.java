@@ -1,6 +1,9 @@
 package br.com.fiap.bookstoore.cp1.service;
 
+import br.com.fiap.bookstoore.cp1.dto.shoppingCart.CreateShoppingCartDTO;
 import br.com.fiap.bookstoore.cp1.dto.shoppingCart.ShoppingCartDetailsDTO;
+import br.com.fiap.bookstoore.cp1.model.Book;
+import br.com.fiap.bookstoore.cp1.model.Customer;
 import br.com.fiap.bookstoore.cp1.model.ShoppingCart;
 import br.com.fiap.bookstoore.cp1.repository.BookRepository;
 import br.com.fiap.bookstoore.cp1.repository.CustomerRepository;
@@ -10,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ShoppingCartService {
@@ -22,15 +28,26 @@ public class ShoppingCartService {
     @Autowired
     BookRepository bookRepository;
 
-//    @Transactional
-//    public ShoppingCart create(
-//            Long customerId,
-//
-//    ){
-//        var shoppingCart =
-//
-//                shoppingCartRepository.save(shoppingCart);
-//    }
+    @Transactional
+    public ShoppingCart create(
+            Long customerId,
+            CreateShoppingCartDTO shoppingCartDTO
+    ){
+        Customer customer = customerRepository.getReferenceById(customerId);
+
+        Set<Book> books = new HashSet<>();
+
+        for (Long bookId : shoppingCartDTO.bookIds()) {
+            Book book = bookRepository.getReferenceById(bookId);
+            books.add(book);
+        }
+
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setCustomer(customer);
+        shoppingCart.setBooks(books);
+
+        return shoppingCartRepository.save(shoppingCart);
+    }
 
     public ShoppingCartDetailsDTO getOne(
         Long shoppingCartId
@@ -46,14 +63,6 @@ public class ShoppingCartService {
                 .stream().map(ShoppingCartDetailsDTO::new).toList();
         return shoppingCartList;
     }
-
-//    @Transactional
-//    public ShoppingCartDetailsDTO update(
-//            Long ShoppingCartId,
-//            Long customerId
-//    ){
-//
-//    }
 
     @Transactional
     public void delete(

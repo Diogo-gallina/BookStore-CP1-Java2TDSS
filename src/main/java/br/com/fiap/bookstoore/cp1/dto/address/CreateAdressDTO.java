@@ -1,6 +1,4 @@
-package br.com.fiap.bookstoore.cp1.dto.adress;
-
-import br.com.fiap.bookstoore.cp1.model.Customer;
+package br.com.fiap.bookstoore.cp1.dto.address;
 
 public record CreateAdressDTO(
         String cep,

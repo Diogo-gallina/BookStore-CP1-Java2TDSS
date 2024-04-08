@@ -1,7 +1,6 @@
-package br.com.fiap.bookstoore.cp1.dto.adress;
+package br.com.fiap.bookstoore.cp1.dto.address;
 
 import br.com.fiap.bookstoore.cp1.model.Adress;
-import br.com.fiap.bookstoore.cp1.model.Customer;
 
 import java.time.LocalDateTime;
 

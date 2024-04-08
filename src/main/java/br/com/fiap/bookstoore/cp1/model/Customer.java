@@ -1,6 +1,7 @@
 package br.com.fiap.bookstoore.cp1.model;
 
 import br.com.fiap.bookstoore.cp1.dto.customer.CreateCustomerDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,8 +47,8 @@ public class Customer {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy = "customer")
-    private ShoppingCart shoppingCart;
+    @OneToMany(mappedBy = "customer")
+    private List<ShoppingCart> shoppingCart;
 
     @ManyToMany
     @JoinTable(name = "java_cp1_customer_book",

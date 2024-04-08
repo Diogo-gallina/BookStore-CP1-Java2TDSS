@@ -63,13 +63,6 @@ public class AssessmentService {
         return new AssessmentDetailsDTO(assessment);
     }
 
-    public AssessmentDetailsDTO getOneAssessmentByBook(Long assessmentId, Long bookId){
-        var book = bookRepository.getReferenceById(bookId);
-        var assessment = assessmentRepository.getReferenceById(assessmentId);
-
-        return new AssessmentDetailsDTO(assessment);
-    }
-
     @Transactional
     public AssessmentDetailsDTO update(
             Long assessmentId,

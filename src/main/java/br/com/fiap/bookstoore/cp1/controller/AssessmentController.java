@@ -1,6 +1,5 @@
 package br.com.fiap.bookstoore.cp1.controller;
 
-import br.com.fiap.bookstoore.cp1.dto.adress.AdressDetailsDTO;
 import br.com.fiap.bookstoore.cp1.dto.assessment.AssessmentDetailsDTO;
 import br.com.fiap.bookstoore.cp1.dto.assessment.CreateAssessmentDTO;
 import br.com.fiap.bookstoore.cp1.dto.assessment.UpdateAssessmentDTO;
@@ -44,15 +43,6 @@ public class AssessmentController {
             @PathVariable("assessment_id") Long assessmentId
     ){
         var assessment = assessmentService.getOneAssessment(assessmentId);
-        return ResponseEntity.ok(assessment);
-    }
-
-    @GetMapping("{assessment_id}/book/{book_id}")
-    public ResponseEntity<AssessmentDetailsDTO> findOneAssessmentByBook(
-            @PathVariable("book_id") Long bookId,
-            @PathVariable("assessment_id") Long assessmentId
-    ){
-        var assessment = assessmentService.getOneAssessmentByBook(assessmentId, bookId);
         return ResponseEntity.ok(assessment);
     }
 

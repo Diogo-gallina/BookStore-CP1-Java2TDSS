@@ -1,4 +1,4 @@
-package br.com.fiap.bookstoore.cp1.dto.adress;
+package br.com.fiap.bookstoore.cp1.dto.address;
 
 public record UpdateAdressDTO(
         String cep,

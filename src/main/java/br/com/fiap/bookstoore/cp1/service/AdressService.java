@@ -1,11 +1,10 @@
 package br.com.fiap.bookstoore.cp1.service;
 
-import br.com.fiap.bookstoore.cp1.dto.adress.AdressDetailsDTO;
-import br.com.fiap.bookstoore.cp1.dto.adress.CreateAdressDTO;
-import br.com.fiap.bookstoore.cp1.dto.adress.UpdateAdressDTO;
+import br.com.fiap.bookstoore.cp1.dto.address.AdressDetailsDTO;
+import br.com.fiap.bookstoore.cp1.dto.address.CreateAdressDTO;
+import br.com.fiap.bookstoore.cp1.dto.address.UpdateAdressDTO;
 import br.com.fiap.bookstoore.cp1.handler.InvalidAddressException;
 import br.com.fiap.bookstoore.cp1.model.Adress;
-import br.com.fiap.bookstoore.cp1.model.Customer;
 import br.com.fiap.bookstoore.cp1.repository.AdressRepository;
 import br.com.fiap.bookstoore.cp1.repository.CustomerRepository;
 import jakarta.transaction.Transactional;
